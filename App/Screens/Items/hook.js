@@ -1,18 +1,17 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 
-const URL = 'https://api.shop.waf.com.ua/product';
-const pageLimit = 2;
-
-export const usePaginatedFlatListData = (url) => {
-  const [data, setData] = useState([]);
-  const page = useRef({ page: 1 });
+export const usePaginatedFlatListData = ({ url, itemsLimit = 5, initialPage = 1 }) => {
+  const page = useRef(initialPage);
+  const forceRefetch = useRef({});
   const preventDoubleFetchingMore = useRef(false);
+
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const getData = async () => {
-    const newData = await fetch(`${URL}?page=${page.current.page}&limit=${pageLimit}`);
+  const getData = useCallback(async () => {
+    const newData = await fetch(`${url}?page=${page.current}&limit=${itemsLimit}`);
     const jsonNewData = await newData.json();
 
     if (isRefreshing) {
@@ -26,24 +25,26 @@ export const usePaginatedFlatListData = (url) => {
     setIsLoading(false);
 
     preventDoubleFetchingMore.current = false;
-  };
+  }, [isRefreshing, itemsLimit, url]);
 
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
     setIsRefreshing(true);
-    page.current = { page: 1 };
-  };
+    page.current = 1;
+    // Required to force an update if we are on the first page
+    forceRefetch.current = {};
+  }, []);
 
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page.current]);
+  }, [page.current, forceRefetch.current]);
 
-  const fetchMore = () => {
-    if (preventDoubleFetchingMore.current || isLoading) return;
-    page.current = { page: page.current.page + 1 };
+  const fetchMore = useCallback(() => {
+    if (preventDoubleFetchingMore.current) return;
+    page.current += 1;
     preventDoubleFetchingMore.current = true;
     setIsFetchingMore(true);
-  };
+  }, []);
 
   return {
     data,

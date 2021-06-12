@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
 import { decode } from 'html-entities';
 import StarRating from 'react-native-star-rating';
@@ -6,7 +6,6 @@ import { usePaginatedFlatListData } from './hook';
 import Spinner from '../../Components/Spinner';
 
 const URL = 'https://api.shop.waf.com.ua/product';
-const pageLimit = 5;
 const regex = /(<([^>]+)>)/gi;
 
 const ItemsScreen = () => {
@@ -18,46 +17,9 @@ const ItemsScreen = () => {
     fetchMore,
     refresh,
   } = usePaginatedFlatListData({ url: URL });
-  console.log(items.length);
-  // const page = useRef(1);
-  // const [items, setItems] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [isRefreshing, setIsRefreshing] = useState(false);
-  // const [isFetchingMore, setIsFetchingMore] = useState(false);
-
-  // const loadData = async (refresh) => {
-  //   setIsRefreshing(true);
-  //   const newData = await fetch(`${URL}?page=${page.current}&limit=${pageLimit}`);
-  //   const jsonNewData = await newData.json();
-  //   console.log({ isRefreshing });
-  //   setItems((prev) => {
-  //     console.log({ isRefreshing, tt: [...(!isRefreshing && prev), ...jsonNewData], bb: '1231321321' });
-  //     return [...jsonNewData];
-  //   });
-  //   setIsLoading(false);
-  //   setIsRefreshing(false);
-  //   setIsFetchingMore(false);
-  // };
-
-  // const goNextPage = async () => {
-  //   if (isFetchingMore) return;
-  //   setIsFetchingMore(true);
-  //   page.current += 1;
-  //   loadData();
-  // };
-
-  // const refreshList = () => {
-  //   page.current = 1;
-  //   loadData();
-  // };
-
-  // useEffect(() => {
-  //   loadData();
-  // }, []);
 
   return (
     <View style={styles.listContainer}>
-      {console.log('render')}
       {isLoading ? (
         <Spinner isLoading={isLoading} />
       ) : (
