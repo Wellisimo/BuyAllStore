@@ -1,49 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
 import { decode } from 'html-entities';
 import StarRating from 'react-native-star-rating';
-
+import { useFetchData } from './hook';
 import Spinner from '../../Components/Spinner';
 
 const URL = 'https://api.shop.waf.com.ua/product';
-const pageLimit = 10;
+const pageLimit = 5;
 const regex = /(<([^>]+)>)/gi;
 
 const ItemsScreen = () => {
-  const [page, setPage] = useState(1);
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const { data: items, isLoading, isRefreshing, isFetchingMore, fetchMore, refresh } = useFetchData();
+  console.log(items.length);
+  // const page = useRef(1);
+  // const [items, setItems] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [isRefreshing, setIsRefreshing] = useState(false);
+  // const [isFetchingMore, setIsFetchingMore] = useState(false);
 
-  const loadData = async () => {
-    const newData = await fetch(`${URL}?page=${page}&limit=${pageLimit}`);
-    const jsonNewData = await newData.json();
-    setItems((prev) => [...prev, ...jsonNewData]);
-    setIsLoading(false);
-    setIsRefreshing(false);
-    setIsFetchingMore(false);
-  };
+  // const loadData = async (refresh) => {
+  //   setIsRefreshing(true);
+  //   const newData = await fetch(`${URL}?page=${page.current}&limit=${pageLimit}`);
+  //   const jsonNewData = await newData.json();
+  //   console.log({ isRefreshing });
+  //   setItems((prev) => {
+  //     console.log({ isRefreshing, tt: [...(!isRefreshing && prev), ...jsonNewData], bb: '1231321321' });
+  //     return [...jsonNewData];
+  //   });
+  //   setIsLoading(false);
+  //   setIsRefreshing(false);
+  //   setIsFetchingMore(false);
+  // };
 
-  const goNextPage = async () => {
-    setIsFetchingMore(true);
-    setPage((prev) => prev + 1);
-  };
+  // const goNextPage = async () => {
+  //   if (isFetchingMore) return;
+  //   setIsFetchingMore(true);
+  //   page.current += 1;
+  //   loadData();
+  // };
 
-  const refreshList = () => {
-    setIsRefreshing(() => true);
-    setItems([]);
-    setPage(() => 1);
-    // loadData();
-  };
+  // const refreshList = () => {
+  //   page.current = 1;
+  //   loadData();
+  // };
 
-  useEffect(() => {
-    loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  // useEffect(() => {
+  //   loadData();
+  // }, []);
 
   return (
     <View style={styles.listContainer}>
+      {console.log('render')}
       {isLoading ? (
         <Spinner isLoading={isLoading} />
       ) : (
@@ -53,9 +60,13 @@ const ItemsScreen = () => {
           data={items}
           keyExtractor={(item) => item.key}
           onEndReachedThreshold={0.3}
-          onEndReached={goNextPage}
+          onEndReached={() => {
+            console.log('endReached');
+            // goNextPage();
+            fetchMore();
+          }}
           refreshing={isRefreshing}
-          onRefresh={refreshList}
+          onRefresh={refresh}
           renderItem={({ item }) => (
             <View style={styles.itemContainer}>
               <Image
