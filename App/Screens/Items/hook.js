@@ -1,46 +1,48 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 
 const URL = 'https://api.shop.waf.com.ua/product';
-const pageLimit = 5;
+const pageLimit = 2;
 
-export const useFetchData = (url) => {
+export const usePaginatedFlatListData = (url) => {
   const [data, setData] = useState([]);
-  const page = useRef(1);
+  const page = useRef({ page: 1 });
+  const preventDoubleFetchingMore = useRef(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const getData = useCallback(async () => {
-    const newData = await fetch(`${URL}?page=${page.current}&limit=${pageLimit}`);
+  const getData = async () => {
+    const newData = await fetch(`${URL}?page=${page.current.page}&limit=${pageLimit}`);
     const jsonNewData = await newData.json();
 
-    setData((prev) => [...prev, ...jsonNewData]);
+    if (isRefreshing) {
+      setData(jsonNewData);
+    } else {
+      setData((prev) => [...prev, ...jsonNewData]);
+    }
 
-    page.current += 1;
-  }, []);
+    setIsFetchingMore(false);
+    setIsRefreshing(false);
+    setIsLoading(false);
 
-  const refresh = useCallback(async () => {
+    preventDoubleFetchingMore.current = false;
+  };
+
+  const refresh = async () => {
     setIsRefreshing(true);
-    page.current = 1;
-    const newData = await fetch(`${URL}?page=${page.current}&limit=${pageLimit}`);
-    const jsonNewData = await newData.json();
-    setData(jsonNewData);
-    setIsRefreshing(false);
-    page.current += 1;
-    setIsRefreshing(false);
-  }, []);
+    page.current = { page: 1 };
+  };
 
   useEffect(() => {
     getData();
-    setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page.current]);
 
-  const fetchMore = async () => {
-    if (isFetchingMore) return;
+  const fetchMore = () => {
+    if (preventDoubleFetchingMore.current || isLoading) return;
+    page.current = { page: page.current.page + 1 };
+    preventDoubleFetchingMore.current = true;
     setIsFetchingMore(true);
-    await getData();
-    setIsFetchingMore(false);
   };
 
   return {

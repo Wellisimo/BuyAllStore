@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
 import { decode } from 'html-entities';
 import StarRating from 'react-native-star-rating';
-import { useFetchData } from './hook';
+import { usePaginatedFlatListData } from './hook';
 import Spinner from '../../Components/Spinner';
 
 const URL = 'https://api.shop.waf.com.ua/product';
@@ -10,7 +10,14 @@ const pageLimit = 5;
 const regex = /(<([^>]+)>)/gi;
 
 const ItemsScreen = () => {
-  const { data: items, isLoading, isRefreshing, isFetchingMore, fetchMore, refresh } = useFetchData();
+  const {
+    data: items,
+    isLoading,
+    isRefreshing,
+    isFetchingMore,
+    fetchMore,
+    refresh,
+  } = usePaginatedFlatListData({ url: URL });
   console.log(items.length);
   // const page = useRef(1);
   // const [items, setItems] = useState([]);
@@ -62,7 +69,6 @@ const ItemsScreen = () => {
           onEndReachedThreshold={0.3}
           onEndReached={() => {
             console.log('endReached');
-            // goNextPage();
             fetchMore();
           }}
           refreshing={isRefreshing}
