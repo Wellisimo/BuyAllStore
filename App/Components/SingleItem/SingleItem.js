@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, Image, ScrollView, FlatList } from 'react-native';
 import { decode } from 'html-entities';
 import StarRating from 'react-native-star-rating';
-import Carousel from 'react-native-snap-carousel';
 
 import { URL, regex } from '../../Constants/Constants';
 import styles from './styles';
@@ -10,32 +9,20 @@ import styles from './styles';
 const SingleItem = ({ item, onPress, singleItem }) => (
   <View style={styles.itemContainer}>
     {singleItem ? (
-      // <Carousel
-      //   sliderWidth={300}
-      //   itemWidth={200}
-      //   itemHeight={300}
-      //   data={item.files}
-      //   renderItem={(elem) => (
-      //     <Image
-      //       style={styles.previewImage}
-      //       key={elem.id}
-      //       source={{
-      //         uri: `${URL}/product/img/${elem.name}`,
-      //       }}
-      //     />
-      //   )}
-      // />
-      <ScrollView horizontal contentContainerStyle={styles.scrollView}>
-        {item.files.map((elem) => (
+      <FlatList
+        horizontal
+        style={styles.scrollView}
+        data={item.files}
+        keyExtractor={(image) => image.id.toString()}
+        renderItem={({ item: image }) => (
           <Image
             style={styles.previewImage}
-            key={elem.id}
             source={{
-              uri: `${URL}/product/img/${elem.name}`,
+              uri: `${URL}/product/img/${image.name}`,
             }}
           />
-        ))}
-      </ScrollView>
+        )}
+      />
     ) : (
       <Image
         style={styles.itemImage}

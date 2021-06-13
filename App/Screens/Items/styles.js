@@ -5,10 +5,10 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
+    margin: 20,
   },
   flatList: {
     flex: 1,
-    marginHorizontal: 10,
   },
   itemImage: {
     borderRadius: 50,
@@ -33,7 +33,6 @@ export default StyleSheet.create({
     marginRight: 90,
   },
   itemSmallText: {
-    marginTop: 10,
     fontSize: 18,
     fontWeight: '300',
   },
@@ -43,5 +42,19 @@ export default StyleSheet.create({
     alignItems: 'center',
     fontSize: 18,
     fontWeight: '500',
+  },
+  textInput: {
+    flex: 1,
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 50,
+    paddingHorizontal: 10,
+    marginLeft: 15,
+  },
+  textInputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
   },
 });

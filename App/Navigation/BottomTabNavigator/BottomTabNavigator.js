@@ -4,18 +4,12 @@ import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
 import ShopNavigator from '../ShopNavigator/ShopNavigator';
 import UserInfoScreen from '../../Screens/UserInfo/UserInfo';
-import { Screen } from '../../Components/Helpers/Dimensions';
+import { isIphoneX } from '../../Components/Helpers/Dimensions';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
-  let height = 40;
-
-  if (Screen().HasNotch() && Screen().IsIOS()) {
-    height += 30;
-  } else if (Screen().IsIOS()) {
-    height += 10;
-  }
+  const height = isIphoneX ? 60 : 40;
 
   return (
     <Tab.Navigator

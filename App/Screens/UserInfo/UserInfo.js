@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Button from '../../Components/Button/Button';
@@ -57,12 +57,12 @@ const UserInfoScreen = () => {
           uri: userInfo.avatar ? `${URL}/users/avatar/${userInfo.avatar}` : Avatar,
         }}
       />
-      <Text style={styles.itemSmallText}>ID: {userInfo.id}</Text>
-      <Text style={styles.itemSmallText}>First name: {userInfo.firstName}</Text>
-      <Text style={styles.itemSmallText}>Last name: {userInfo.lastName}</Text>
-      <Text style={styles.itemSmallText}>Phone number: {userInfo.phoneNumber}</Text>
-      <Text style={styles.itemSmallText}>Email: {userInfo.email}</Text>
-      <Text style={styles.itemSmallText}>Date of birth: {userInfo.dateOfBirth}</Text>
+      {!!userInfo.id && <Text style={styles.itemSmallText}>ID: {userInfo.id}</Text>}
+      {!!userInfo.firstName && <Text style={styles.itemSmallText}>First name: {userInfo.firstName}</Text>}
+      {!!userInfo.lastName && <Text style={styles.itemSmallText}>Last name: {userInfo.lastName}</Text>}
+      {!!userInfo.phoneNumber && <Text style={styles.itemSmallText}>Phone number: {userInfo.phoneNumber}</Text>}
+      {!!userInfo.email && <Text style={styles.itemSmallText}>Email: {userInfo.email}</Text>}
+      {!!userInfo.dateOfBirth && <Text style={styles.itemSmallText}>Date of birth: {userInfo.dateOfBirth}</Text>}
 
       <Button title="Log Out" onPress={() => logOut()} />
     </View>

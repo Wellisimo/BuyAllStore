@@ -19,13 +19,14 @@ const ItemCard = ({ route: { params } }) => {
       },
     });
     const jsonNewData = await newData.json();
-    // console.log(jsonNewData);
+
     setItem(jsonNewData);
     setIsLoading(false);
   };
 
   useEffect(() => {
     getItemData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

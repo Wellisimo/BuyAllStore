@@ -52,9 +52,9 @@ const Register = ({ navigation }) => {
   const { setData } = useContext(MyContext);
 
   const [userData, setUserData] = useMergeState({
-    firstName: '', //  string123
-    email: '', //  stringqweasd124@gmail.com
-    phoneNumber: '', //  +380669699522
+    firstName: 'string123', //  string123
+    email: 'stringqweasd124@gmail.com', //  stringqweasd124@gmail.com
+    phoneNumber: '+380669699522', //  +380669699522
 
     // full register doesn't work on server, implementing fast register;
     // lastName: 'TestLastName33',

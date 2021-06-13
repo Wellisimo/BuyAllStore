@@ -24,9 +24,7 @@ export default StyleSheet.create({
     marginHorizontal: 5,
   },
   scrollView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 10,
   },
   itemText: {
     marginTop: 10,
@@ -66,6 +64,7 @@ export default StyleSheet.create({
     fontWeight: '500',
   },
   itemDescriptionContainer: {
+    marginTop: 10,
     marginBottom: 20,
   },
 });
