@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import AuthNavigator from '../AuthNavigator';
-import BottomTabNavigator from '../BottomTabNavigator';
+import AuthNavigator from '../AuthNavigator/AuthNavigator';
+import BottomTabNavigator from '../BottomTabNavigator/BottomTabNavigator';
 import { MyContext } from '../../Context/Context';
 
 const Root = createStackNavigator();

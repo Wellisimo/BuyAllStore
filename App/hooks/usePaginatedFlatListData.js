@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 
-export const usePaginatedFlatListData = ({ url, itemsLimit = 5, initialPage = 1 }) => {
+export const usePaginatedFlatListData = ({ url, itemsLimit = 10, initialPage = 1 }) => {
   const page = useRef(initialPage);
   const forceRefetch = useRef({});
   const preventDoubleFetchingMore = useRef(false);
@@ -18,7 +18,7 @@ export const usePaginatedFlatListData = ({ url, itemsLimit = 5, initialPage = 1 
       },
     });
     const jsonNewData = await newData.json();
-
+    // console.log(jsonNewData);
     if (isRefreshing) {
       setData(jsonNewData);
     } else {

@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { MyContext } from './App/Context/Context';
 import useMergeState from './App/hooks/useMergeState';
-import RootNavigator from './App/Navigation/RootNavigator';
+import RootNavigator from './App/Navigation/RootNavigator/RootNavigator';
 
 const App = () => {
   const [data, setData] = useMergeState({ isLoggedIn: false, token: '' });
