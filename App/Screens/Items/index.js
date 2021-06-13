@@ -2,10 +2,11 @@ import React from 'react';
 import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
 import { decode } from 'html-entities';
 import StarRating from 'react-native-star-rating';
-import { usePaginatedFlatListData } from './hook';
-import Spinner from '../../Components/Spinner';
 
-const URL = 'https://api.shop.waf.com.ua/product';
+import { usePaginatedFlatListData } from '../../hooks/usePaginatedFlatListData';
+import Spinner from '../../Components/Spinner';
+import { URL } from '../../Constants/Constants';
+
 const regex = /(<([^>]+)>)/gi;
 
 const ItemsScreen = () => {
@@ -30,7 +31,6 @@ const ItemsScreen = () => {
           keyExtractor={(item) => item.key}
           onEndReachedThreshold={0.3}
           onEndReached={() => {
-            console.log('endReached');
             fetchMore();
           }}
           refreshing={isRefreshing}
@@ -40,7 +40,7 @@ const ItemsScreen = () => {
               <Image
                 style={styles.itemImage}
                 source={{
-                  uri: `${URL}/img/${item.mainImg.name}`,
+                  uri: `${URL}/product/img/${item.mainImg.name}`,
                 }}
               />
               <Text style={styles.itemText}>{decode(item.name)}</Text>
@@ -82,8 +82,6 @@ const styles = StyleSheet.create({
   },
   flatList: {
     flex: 1,
-    // width: "100%",
-    // paddingLeft: "10%",
   },
   itemContainer: {
     marginVertical: 10,
@@ -96,7 +94,6 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     borderRadius: 50,
-    // flex: 1,
     width: 250,
     height: 300,
     resizeMode: 'cover',

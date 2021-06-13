@@ -11,7 +11,12 @@ export const usePaginatedFlatListData = ({ url, itemsLimit = 5, initialPage = 1 
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const getData = useCallback(async () => {
-    const newData = await fetch(`${url}?page=${page.current}&limit=${itemsLimit}`);
+    const newData = await fetch(`${url}/product?page=${page.current}&limit=${itemsLimit}`, {
+      method: 'GET',
+      headers: {
+        accept: '*/*',
+      },
+    });
     const jsonNewData = await newData.json();
 
     if (isRefreshing) {
