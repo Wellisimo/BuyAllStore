@@ -5,6 +5,7 @@ import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import ShopNavigator from '../ShopNavigator/ShopNavigator';
 import UserInfoScreen from '../../Screens/UserInfo/UserInfo';
 import { isIphoneX } from '../../Components/Helpers/Dimensions';
+import screens from '../Screens';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ const BottomTabNavigator = () => {
         },
       }}>
       <Tab.Screen
-        name="ShopNavigator"
+        name={screens.ShopNavigator}
         component={ShopNavigator}
         options={{
           tabBarIcon: () => <FontAwesome name="list-ol" size={24} />,
@@ -30,7 +31,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="UserInfoScreen"
+        name={screens.UserInfo}
         component={UserInfoScreen}
         options={{
           tabBarIcon: () => <AntDesign name="user" size={24} />,

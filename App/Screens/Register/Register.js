@@ -1,52 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MyContext } from '../../Context/Context';
 
 import Button from '../../Components/Button/Button';
 import useMergeState from '../../hooks/useMergeState';
 import { URL } from '../../Constants/Constants';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textInput: {
-    height: 35,
-    width: 300,
-    margin: 10,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 10,
-  },
-  mainText: {
-    marginVertical: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 22,
-    fontWeight: '500',
-  },
-  text: {
-    marginVertical: 20,
-    fontSize: 18,
-    fontWeight: '300',
-  },
-  messageContainer: {
-    width: 300,
-    height: 300,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-  messageText: {
-    marginTop: 10,
-    fontSize: 18,
-    fontWeight: '300',
-    color: 'grey',
-  },
-});
+import screens from '../../Navigation/Screens';
+import styles from './styles';
 
 const Register = ({ navigation }) => {
   const { setData } = useContext(MyContext);
@@ -81,7 +42,7 @@ const Register = ({ navigation }) => {
       } else if (typeof parsedResponse.message === 'string') {
         setError([parsedResponse.message]);
       } else {
-        setError(['gavno']);
+        setError(['oh shit']);
       }
 
       setTimeout(() => {
@@ -152,7 +113,7 @@ const Register = ({ navigation }) => {
           })}
       </TouchableOpacity>
       <Button title="Register" onPress={() => registerUser()} />
-      <Text style={styles.text} onPress={() => navigation.navigate('Login')}>
+      <Text style={styles.text} onPress={() => navigation.navigate(screens.Login)}>
         Already registered? Go to Login page
       </Text>
     </View>

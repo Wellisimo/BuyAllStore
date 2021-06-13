@@ -7,6 +7,7 @@ import Spinner from '../../Components/Spinner';
 import { URL } from '../../Constants/Constants';
 import SingleItem from '../../Components/SingleItem/SingleItem';
 import styles from './styles';
+import screens from '../../Navigation/Screens';
 
 const ItemsScreen = ({ navigation: { navigate } }) => {
   const {
@@ -55,6 +56,7 @@ const ItemsScreen = ({ navigation: { navigate } }) => {
               value={maxPrice}
               autoCapitalize="none"
               keyboardType="numeric"
+              placeholder="Enter desired price limit"
               onChangeText={(e) => {
                 onMaxPriceChangeSearchDebounce(e);
                 setMaxPrice(e);
@@ -67,6 +69,7 @@ const ItemsScreen = ({ navigation: { navigate } }) => {
               style={styles.textInput}
               value={searchText}
               autoCapitalize="none"
+              placeholder="Search parameters"
               onChangeText={(e) => {
                 onTextChangeSearchDebounce(e);
                 setSearchText(e);
@@ -81,7 +84,9 @@ const ItemsScreen = ({ navigation: { navigate } }) => {
             onEndReached={searchText ? fetchMoreByName : fetchMore}
             refreshing={searchText ? isRefreshingByName : isRefreshing}
             onRefresh={searchText ? refreshByName : refresh}
-            renderItem={({ item }) => <SingleItem item={item} onPress={() => navigate('ItemCard', { id: item.id })} />}
+            renderItem={({ item }) => (
+              <SingleItem item={item} onPress={() => navigate(screens.ItemCard, { id: item.id })} />
+            )}
             ListEmptyComponent={<Text>Nothing was found. Try changing filter options</Text>}
             ListFooterComponent={<Spinner isLoading={searchText ? isFetchingMoreByName : isFetchingMore} />}
           />
