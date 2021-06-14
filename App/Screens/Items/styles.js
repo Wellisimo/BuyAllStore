@@ -5,7 +5,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    margin: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
   },
   flatList: {
     flex: 1,
@@ -45,7 +46,7 @@ export default StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    height: 40,
+    height: 30,
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 50,
@@ -55,6 +56,6 @@ export default StyleSheet.create({
   textInputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 5,
   },
 });

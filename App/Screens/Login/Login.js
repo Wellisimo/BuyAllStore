@@ -68,6 +68,7 @@ const Login = ({ navigation }) => {
         style={styles.textInput}
         value={userData.password}
         placeholder="Password"
+        secureTextEntry
         onChangeText={(text) => setUserData({ password: text })}
       />
       <TouchableOpacity style={styles.messageContainer} onPress={() => setError([])}>

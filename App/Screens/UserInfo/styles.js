@@ -6,24 +6,13 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
-  },
-  button: {
-    width: 150,
-    height: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 10,
-    marginTop: 50,
   },
   itemImage: {
     borderRadius: 50,
-    width: 250,
-    height: 300,
+    width: 200,
+    height: 250,
     resizeMode: 'cover',
-    margin: 30,
+    margin: 10,
   },
   mainText: {
     justifyContent: 'center',
@@ -32,8 +21,8 @@ export default StyleSheet.create({
     fontWeight: '500',
   },
   itemSmallText: {
-    marginTop: 10,
-    fontSize: 18,
+    marginTop: 5,
+    fontSize: 16,
     fontWeight: '300',
   },
 });

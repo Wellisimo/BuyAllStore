@@ -1,4 +1,6 @@
+import { StatusBar } from 'react-native';
 import React, { useEffect } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { MyContext } from './App/Context/Context';
@@ -21,6 +23,7 @@ const App = () => {
 
   return (
     <MyContext.Provider value={{ data, setData }}>
+      <StatusBar barStyle={'default'} />
       <RootNavigator />
     </MyContext.Provider>
   );

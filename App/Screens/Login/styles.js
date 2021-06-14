@@ -29,13 +29,13 @@ export default StyleSheet.create({
   },
   messageContainer: {
     width: 300,
-    height: 300,
+    height: 100,
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
   messageText: {
-    marginTop: 10,
-    fontSize: 18,
+    marginTop: 5,
+    fontSize: 16,
     fontWeight: '300',
     color: 'grey',
   },

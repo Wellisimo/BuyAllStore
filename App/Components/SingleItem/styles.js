@@ -18,16 +18,18 @@ export default StyleSheet.create({
     marginHorizontal: 5,
   },
   previewImage: {
-    width: 150,
+    width: 200,
     height: 250,
     resizeMode: 'cover',
     marginHorizontal: 5,
   },
   scrollView: {
-    marginVertical: 10,
+    marginVertical: 5,
+    minHeight: 250,
+    height: 300,
   },
   itemText: {
-    marginTop: 10,
+    marginTop: 5,
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 22,
@@ -47,7 +49,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   itemSmallText: {
-    marginTop: 10,
+    marginTop: 5,
     fontSize: 18,
     fontWeight: '300',
   },
@@ -57,11 +59,12 @@ export default StyleSheet.create({
     color: 'green',
   },
   itemDescription: {
-    margin: 15,
+    margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 18,
     fontWeight: '500',
+    padding: 0,
   },
   itemDescriptionContainer: {
     marginTop: 10,
