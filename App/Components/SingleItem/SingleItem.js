@@ -18,7 +18,7 @@ const SingleItem = ({ item, onPress, singleItem }) => (
           <Image
             style={styles.previewImage}
             source={{
-              uri: `${URL}/product/img/${image.name}`,
+              uri: `${URL}${image.url}`,
             }}
           />
         )}
@@ -27,7 +27,7 @@ const SingleItem = ({ item, onPress, singleItem }) => (
       <Image
         style={styles.itemImage}
         source={{
-          uri: `${URL}/product/img/${item.mainImg.name}`,
+          uri: `${URL}${item.mainImg.url}`,
         }}
       />
     )}

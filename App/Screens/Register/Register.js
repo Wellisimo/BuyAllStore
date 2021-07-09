@@ -14,18 +14,16 @@ const Register = ({ navigation }) => {
 
   const [userData, setUserData] = useMergeState({
     firstName: 'string123', //  string123
-    email: 'stringqweasd124@gmail.com', //  stringqweasd124@gmail.com
+    email: 'stringqweasd123@gmail.com', //  stringqweasd123@gmail.com
     phoneNumber: '+380669699522', //  +380669699522
-
-    // full register doesn't work on server, implementing fast register;
-    // lastName: 'TestLastName33',
-    // password: 'TestMyPassword774',
-    // confirmPassword: 'TestMyPassword774',
+    lastName: 'TestLastName33', //  TestLastName33
+    password: 'TestMyPassword774', //  TestMyPassword774
+    confirmPassword: 'TestMyPassword774', //  TestMyPassword774
   });
   const [error, setError] = useState([]);
 
   const registerUser = async () => {
-    const response = await fetch(`${URL}/auth/fast-register`, {
+    const response = await fetch(`${URL}/auth/register`, {
       method: 'POST',
       headers: {
         accept: '*/*',
@@ -70,7 +68,7 @@ const Register = ({ navigation }) => {
         placeholder="First Name"
         onChangeText={(text) => setUserData({ firstName: text })}
       />
-      {/* <TextInput
+      <TextInput
         style={styles.textInput}
         value={userData.lastName}
         placeholder="Last Name"
@@ -87,7 +85,7 @@ const Register = ({ navigation }) => {
         value={userData.confirmPassword}
         placeholder="Confirm Password"
         onChangeText={(text) => setUserData({ confirmPassword: text })}
-      /> */}
+      />
       <TextInput
         style={styles.textInput}
         value={userData.email}
